@@ -1,0 +1,11 @@
+.news-wrapper .news {
+    padding-bottom: 5px;
+}
+.news-wrapper .news a {
+    text-decoration: none;
+    color: black;
+}
+.news-wrapper .news a:hover {
+    text-decoration: none;
+    color: #2196F3;
+}

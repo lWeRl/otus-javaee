@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello page</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    {{another-style}}
+</head>
+<body>
+<header class="header">
+    <span>Проект курса JavaEE на обучающем портале <a href="http:\\otus.ru">OTUS</a></span>
+    <div><img src="https://otus.ru/media/18/fa/18fa32eefb974c638e16be5cb2e7bd11.png"></div>
+</header>
+<nav class="nav">
+    <a class="nav-element {{main-select}}" href="/main">Главная</a>
+    <a class="nav-element {{login-select}}" href="/login">Логин</a>
+    <a class="nav-element {{news-select}}" href="/news">Новости</a>
+    <a class="nav-element {{script-select}}" href="/script">Скрипт</a>
+    <a class="nav-element {{other-select}}" href="/other">Другое</a>
+    <form action="http://www.google.com/search" class="search-form" method="get" name="searchform" target="_blank">
+        <input class="form-controls search" name="q" placeholder="Поиск ..." required="required"  type="text">
+        <button class="button" type="submit">Поиск</button>
+    </form>
+</nav>
+<main class="main-wrapper">
+    <section class="left-side">{{left-side}}</section>
+    <aside class="right-side">{{right-side}}</aside>
+</main>
+<footer class="footer"><span>I'm footer</span></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+{{another-script}}
+</html>
