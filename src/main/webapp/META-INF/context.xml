@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--ONLY FOR Tomcat-->
+
+<Context>
+    <Resource name="jdbc/PostgreSQL"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="org.postgresql.Driver"
+              username="test"
+              password="test"
+              url="jdbc:postgresql://localhost:5432/java_ee"
+    />
+</Context>

@@ -35,10 +35,12 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 17px;
+    cursor: pointer;
 }
-.nav .selected {
+.nav .selected, .nav .nav-element[selected] {
     background-color: #2196F3;
     color: white;
+    cursor: default;
 }
 .nav .search-form {
     float: right;
