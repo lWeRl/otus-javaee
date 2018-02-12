@@ -1,14 +1,17 @@
 package com.lwerl.javaee.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
  * Created by lWeRl on 21.01.2018.
  */
+
+@NamedStoredProcedureQuery(
+        name = "getMaxSalaryName",
+        procedureName = "getMaxSalaryName",
+        resultClasses = String.class
+)
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "employee")
@@ -111,5 +114,18 @@ public class Employee {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", department=" + department +
+                ", position=" + position +
+                ", login='" + login + '\'' +
+                '}';
     }
 }

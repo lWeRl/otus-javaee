@@ -4,7 +4,6 @@ import com.lwerl.javaee.cache.CurrencyRatesHolder;
 import com.lwerl.javaee.helper.TemplateBuilder;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,12 +20,10 @@ public class MainPageServlet extends HttpServlet {
     @Inject
     private CurrencyRatesHolder rateInfo;
 
-    @Inject
-    private EntityManager entityManager;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
+
         resp.getWriter().write(
                 TemplateBuilder.of(getServletContext())
                         .addString("{{main-select}}", "selected")
