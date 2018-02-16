@@ -25,7 +25,7 @@ public class JAXBListWrapper<T> {
         return items;
     }
 
-    public JAXBElement<JAXBListWrapper> toElement(String name) {
-        return new JAXBElement<>(new QName(name), JAXBListWrapper.class, this);
+    public JAXBElement<JAXBListWrapper> toElement(QName name) {
+        return new JAXBElement<>(name, JAXBListWrapper.class, this);
     }
 }
