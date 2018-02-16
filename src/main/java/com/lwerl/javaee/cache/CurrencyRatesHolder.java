@@ -51,16 +51,17 @@ public class CurrencyRatesHolder {
 
     public String getHtmlView() {
         StringWriter result = new StringWriter();
-        try {
+        try(StringReader rawXmlReader = new StringReader(raw)) {
             read.lock();
             StreamSource xslSource = new StreamSource(getClass().getClassLoader().getResourceAsStream("/xslt/currency.xsl"));
-            StreamSource source = new StreamSource(new StringReader(raw));
+            StreamSource source = new StreamSource(rawXmlReader);
             Transformer transformer = TransformerFactory.newInstance().newTransformer(xslSource);
             transformer.transform(source, new StreamResult(result));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             read.unlock();
+
         }
         return result.toString();
     }
