@@ -13,7 +13,7 @@ public class JAXBListWrapper<T> {
     private List<T> items;
 
     public JAXBListWrapper() {
-        items = new ArrayList<T>();
+        items = new ArrayList<>();
     }
 
     public JAXBListWrapper(List<T> items) {

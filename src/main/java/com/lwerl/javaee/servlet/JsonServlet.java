@@ -46,7 +46,7 @@ public class JsonServlet extends HttpServlet {
 
     @SuppressWarnings("unchecked")
     private List<Employee> getListFromFile() throws IOException, ServletException {
-        try(InputStream inputStream = Files.newInputStream(Paths.get(XMLServlet.XML_FILE_PATH))) {
+        try (InputStream inputStream = Files.newInputStream(Paths.get(XMLServlet.XML_FILE_PATH))) {
             JAXBContext context = JAXBContext.newInstance(JAXBRegistry.class, JAXBListWrapper.class, Employee.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             return ((JAXBElement<JAXBListWrapper<Employee>>) unmarshaller.unmarshal(inputStream)).getValue().getItems();
@@ -62,19 +62,24 @@ public class JsonServlet extends HttpServlet {
                 .setPrettyPrinting()
                 .create();
         String json = gson.toJson(source);
-        try(BufferedWriter out = new BufferedWriter(new FileWriter(JSON_FILE_PATH))){
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(JSON_FILE_PATH))) {
             out.write(json);
         }
         return json;
     }
 
-    private List<Employee> getOddEmployeesFromFile() throws FileNotFoundException {
-        Gson gson = new GsonBuilder().create();
-        Type listType = new TypeToken<ArrayList<Employee>>(){}.getType();
-        List<Employee> employees = gson.fromJson(new FileReader(JSON_FILE_PATH), listType);
-        return Stream.iterate(0, i -> i + 2)
-                .limit(employees.size() / 2)
-                .map(employees::get)
-                .collect(Collectors.toList());
+    private List<Employee> getOddEmployeesFromFile() throws IOException {
+        try (FileReader fileReader = new FileReader(JSON_FILE_PATH)) {
+
+            Gson gson = new GsonBuilder().create();
+            Type listType = new TypeToken<ArrayList<Employee>>() {
+            }.getType();
+            List<Employee> employees = gson.fromJson(fileReader, listType);
+
+            return Stream.iterate(0, i -> i + 2)
+                    .limit(employees.size() / 2)
+                    .map(employees::get)
+                    .collect(Collectors.toList());
+        }
     }
 }

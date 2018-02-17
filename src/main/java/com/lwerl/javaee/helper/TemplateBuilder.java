@@ -4,7 +4,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -16,15 +15,16 @@ import java.util.stream.Collectors;
  * Created by lWeRl on 28.01.2018.
  */
 public class TemplateBuilder {
+
     private ServletContext context;
     private String html;
     private List<Consumer<String>> rules = new ArrayList<>();
 
     private TemplateBuilder(ServletContext context) throws ServletException {
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/template/default.html"), "UTF-8"))) {
             this.context = context;
-            html = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/template/default.html"), "UTF-8")).lines().collect(Collectors.joining("\n"));
-        } catch (UnsupportedEncodingException e) {
+            html = reader.lines().collect(Collectors.joining("\n"));
+        } catch (Exception e) {
             throw new ServletException(e);
         }
     }
@@ -38,13 +38,13 @@ public class TemplateBuilder {
     }
 
     public TemplateBuilder addTemplate(String key, String templatePath) throws ServletException {
-        try {
-            String template = new BufferedReader(new InputStreamReader(context.getResourceAsStream(templatePath), "UTF-8")).lines().collect(Collectors.joining("\n"));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(context.getResourceAsStream(templatePath), "UTF-8"))) {
+            String template = reader.lines().collect(Collectors.joining("\n"));
             rules.add(page -> this.setHtml(page.replaceFirst("\\Q" + key + "\\E", template)));
             return this;
-        }  catch (UnsupportedEncodingException e) {
-        throw new ServletException(e);
-    }
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
     }
 
     public TemplateBuilder addString(String key, String template) {

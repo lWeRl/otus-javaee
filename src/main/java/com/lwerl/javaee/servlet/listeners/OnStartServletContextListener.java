@@ -59,7 +59,6 @@ public class OnStartServletContextListener implements ServletContextListener {
         }
     }
 
-
     private void startScheduler() {
         scheduler.scheduleAtFixedRate(() -> rateInfo.updateRates(), 0, 5, TimeUnit.MINUTES);
         scheduler.scheduleAtFixedRate(() -> newsHolder.updateNews(), 0, 5, TimeUnit.MINUTES);

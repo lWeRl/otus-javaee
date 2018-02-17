@@ -21,24 +21,31 @@ public class EmployeeServlet extends HttpServlet {
     private EmployeeDAO employeeDAO;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        employeeDAO.getAll().stream().sorted((e1,e2) -> (int) (e1.getId() - e2.getId())).forEach(employee -> {
-            try {
-                response.getWriter().println(employee);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        employeeDAO.getAll().stream()
+                .sorted((e1, e2) -> (int) (e1.getId() - e2.getId()))
+                .forEach(employee -> {
+                    try {
+                        response.getWriter().println(employee);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
         change();
+
         response.getWriter().println();
         response.getWriter().println(employeeDAO.getMaxSalaryName());
         response.getWriter().println();
-        employeeDAO.getAll().stream().sorted((e1,e2) -> (int) (e1.getId() - e2.getId())).forEach(employee -> {
-            try {
-                response.getWriter().println(employee);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+
+        employeeDAO.getAll().stream()
+                .sorted((e1, e2) -> (int) (e1.getId() - e2.getId()))
+                .forEach(employee -> {
+                    try {
+                        response.getWriter().println(employee);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     private void change() {

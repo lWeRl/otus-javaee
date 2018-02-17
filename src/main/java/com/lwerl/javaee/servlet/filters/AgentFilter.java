@@ -17,6 +17,11 @@ import java.util.regex.Pattern;
 @WebFilter(filterName = "AgentFilter", urlPatterns = "/*")
 public class AgentFilter implements Filter {
 
+    private final int IE_MIN_VERSION = 10;
+    private final int CHROME_MIN_VERSION = 50;
+    private final int FIREFOX_MIN_VERSION = 45;
+    private final int OPERA_MIN_VERSION = 38;
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         if (req instanceof HttpServletRequest) {
@@ -53,19 +58,19 @@ public class AgentFilter implements Filter {
 
             switch (browser.toLowerCase()) {
                 case ("msie"): {
-                    result = (Integer.parseInt(version) > 9);
+                    result = (Integer.parseInt(version) >= IE_MIN_VERSION);
                     break;
                 }
                 case ("chrome"): {
-                    result = (Integer.parseInt(version) > 49);
+                    result = (Integer.parseInt(version) >= CHROME_MIN_VERSION);
                     break;
                 }
                 case ("firefox"): {
-                    result = (Integer.parseInt(version) > 44);
+                    result = (Integer.parseInt(version) >= FIREFOX_MIN_VERSION);
                     break;
                 }
                 case ("opera"): {
-                    result = (Integer.parseInt(version) > 37);
+                    result = (Integer.parseInt(version) >= OPERA_MIN_VERSION);
                     break;
                 }
             }
