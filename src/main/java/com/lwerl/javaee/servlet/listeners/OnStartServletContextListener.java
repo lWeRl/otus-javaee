@@ -23,10 +23,13 @@ import java.util.logging.Logger;
 public class OnStartServletContextListener implements ServletContextListener {
 
     private final Logger logger = Logger.getLogger("OnStartServletContextListener");
+
     @Inject
     private CurrencyRatesHolder rateInfo;
+
     @Inject
     private NewsHolder newsHolder;
+
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @Override
@@ -68,7 +71,7 @@ public class OnStartServletContextListener implements ServletContextListener {
         try {
             File xmlFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + System.getProperty("xml.restore.file.name"));
             if (xmlFile.exists()) {
-
+                // WHATEVER
             }
         } catch (Exception e) {
             logger.log(Level.WARNING, "File not found", e);
@@ -76,6 +79,6 @@ public class OnStartServletContextListener implements ServletContextListener {
     }
 
     private void saveToXML() {
-
+        // ALSO WHATEVER
     }
 }

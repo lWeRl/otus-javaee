@@ -1,7 +1,6 @@
 package com.lwerl.javaee.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -17,6 +16,8 @@ public class Position {
 
     @XmlAttribute
     @Id
+    @SequenceGenerator(name="pk_sequence",sequenceName="position_id_seq", allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="pk_sequence")
     private Long id;
     private String name;
     private double salary;

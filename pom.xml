@@ -136,34 +136,6 @@
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
-
-            <!--GWT Plugin-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwt.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <module>com.lwerl.javaee.gwt.GWTModule</module>
-                    <extraJvmArgs>
-                         -Xss1024K -Xmx1024M -Duser.language=ru -Duser.country=RU -Djavax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl -Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl
-                    </extraJvmArgs>
-                    <logLevel>INFO</logLevel>
-                    <copyWebapp>true</copyWebapp>
-                    <hostedWebapp>${webapp-dir}</hostedWebapp>
-                    <runTarget>gwt/index.html</runTarget>
-                    <extraParam>true</extraParam>
-                    <extra>extras</extra>
-                    <optimizationLevel>9</optimizationLevel>
-                    <deploy>${project.build.directory}/gwtDeploy</deploy>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>

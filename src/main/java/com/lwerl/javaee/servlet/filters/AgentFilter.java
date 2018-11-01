@@ -86,7 +86,7 @@ public class AgentFilter implements Filter {
     }
 
     private boolean hasCookie(HttpServletRequest req) {
-        return Arrays.stream(req.getCookies()).anyMatch(c -> "browser".equals(c.getName()));
+        return req.getCookies() != null && Arrays.stream(req.getCookies()).anyMatch(c -> "browser".equals(c.getName()));
     }
 
 

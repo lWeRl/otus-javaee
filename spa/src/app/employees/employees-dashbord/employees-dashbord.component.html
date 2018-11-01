@@ -1,0 +1,27 @@
+<div>
+  <div
+    *ngFor="let employee of employees$ | async as employees"
+    class="item"
+    [class.selected]="employee.id == selected?.id"
+    (click)="selected = employee"
+  >
+    {{employee.login}}
+  </div>
+  <div>
+    <button type="button" (click)="selected = {}">
+      Новый
+    </button>
+  </div>
+</div>
+<div>
+  <app-employee
+    *ngIf="selected"
+    [model]="selected"
+    [departments]="departments$ | async"
+    [salaries]="salaries$ | async"
+  >
+    <button *ngIf="!selected.id" type="button" (click)="save(selected)">Сохранить</button>
+    <button *ngIf="selected.id" type="button" (click)="update(selected)">Обновить</button>
+    <button type="button" (click)="delete(selected)">Удалить</button>
+  </app-employee>
+</div>

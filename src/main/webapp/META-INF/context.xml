@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--ONLY FOR Tomcat-->
 
 <Context path="\">
@@ -8,6 +9,6 @@
               driverClassName="org.postgresql.Driver"
               username="test"
               password="test"
-              url="jdbc:postgresql://localhost:5432/java_ee"
+              url="jdbc:postgresql://localhost:5432/otus_ee"
     />
 </Context>

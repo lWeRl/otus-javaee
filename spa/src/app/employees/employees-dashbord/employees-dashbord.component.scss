@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  & > * {
+    flex-grow: 1;
+    max-width: 50%;
+  }
+}
+
+.item {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+  &.selected {
+    border-color: red;
+  }
+}

@@ -20,6 +20,7 @@ public class EmployeeServlet extends HttpServlet {
     @Inject
     private EmployeeDAO employeeDAO;
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         employeeDAO.getAll().stream()
                 .sorted((e1, e2) -> (int) (e1.getId() - e2.getId()))

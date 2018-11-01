@@ -34,9 +34,9 @@ public class EmployeeDAO implements DAO<Employee, Long> {
     @Override
     public Long save(Employee model) {
         entityManager.getTransaction().begin();
-        Long id = (Long) entityManager.unwrap(Session.class).save(model);
+        entityManager.persist(model);
         entityManager.getTransaction().commit();
-        return id;
+        return model.getId();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class EmployeeDAO implements DAO<Employee, Long> {
     @Override
     public void delete(Employee model) {
         entityManager.getTransaction().begin();
-        entityManager.remove(model);
+        entityManager.remove(get(model.getId()));
         entityManager.getTransaction().commit();
     }
 
