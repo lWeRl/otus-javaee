@@ -2,11 +2,13 @@
   <form #form="ngForm">
     <label>
       Название
-      <input type="text" required [(ngModel)]="model.name"/>
+      <input type="text" name="name" class="field" required [(ngModel)]="model.name"/>
     </label>
     <label>
       Ставка
-      <input type="number" required [(ngModel)]="model.salary"/>
+      <input type="number" name="salary" class="field" required [(ngModel)]="model.salary"/>
     </label>
+    <ng-content>
+    </ng-content>
   </form>
 </div>

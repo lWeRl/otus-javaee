@@ -1,3 +1,11 @@
-<p>
-  login works!
-</p>
+<div [formGroup]="form">
+  <label>
+    Логин
+    <input type="text" formControlName="login"/>
+  </label>
+  <label>
+    Пароль
+    <input type="password" formControlName="password"/>
+  </label>
+  <button type="button" (click)="send()">Войти</button>
+</div>

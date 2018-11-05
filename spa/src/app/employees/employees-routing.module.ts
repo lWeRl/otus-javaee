@@ -5,9 +5,11 @@ import {DepartmentsDashbordComponent} from './departments-dashbord/departments-d
 import {PositionsDashbordComponent} from './positions-dashbord/positions-dashbord.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'employees'},
   {path: 'employees', component: EmployeesDashbordComponent},
   {path: 'departments', component: DepartmentsDashbordComponent},
   {path: 'positions', component: PositionsDashbordComponent},
+
 ];
 
 @NgModule({

@@ -56,4 +56,10 @@ public class EmployeeDAO implements DAO<Employee, Long> {
     public String getMaxSalaryName() {
         return (String) entityManager.createStoredProcedureQuery("getMaxSalaryName").getSingleResult();
     }
+
+    public Employee getByLogin(String login) {
+        return entityManager.createQuery("from Employee where login=:login", Employee.class)
+                .setParameter("login", login)
+                .getSingleResult();
+    }
 }

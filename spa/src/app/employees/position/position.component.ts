@@ -8,7 +8,14 @@ import {Salary} from '../models/position';
 })
 export class PositionComponent implements OnInit {
 
+
   @Input()
+  set position(model: Salary) {
+    this.model = {
+      ...model
+    };
+  }
+
   model: Salary = {};
 
   constructor() { }

@@ -11,6 +11,12 @@ import {Salary} from '../models/position';
 export class EmployeeComponent implements OnInit {
 
   @Input()
+  set employee(model: Employee) {
+    this.model = {
+      ...model
+    };
+  }
+
   model: Employee;
 
   @Input()
@@ -31,5 +37,5 @@ export class EmployeeComponent implements OnInit {
     }
 
     return false;
-  }
+  };
 }

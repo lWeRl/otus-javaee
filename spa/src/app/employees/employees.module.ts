@@ -9,7 +9,6 @@ import {EmployeesDashbordComponent} from './employees-dashbord/employees-dashbor
 import {DepartmentsDashbordComponent} from './departments-dashbord/departments-dashbord.component';
 import {PositionsDashbordComponent} from './positions-dashbord/positions-dashbord.component';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -25,7 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
     DepartmentComponent,
     EmployeesDashbordComponent,
     DepartmentsDashbordComponent,
-    PositionsDashbordComponent
+    PositionsDashbordComponent,
   ],
   exports: [
     EmployeeComponent,

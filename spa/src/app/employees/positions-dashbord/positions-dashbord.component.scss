@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  & > * {
+    flex-grow: 1;
+    max-width: 50%;
+  }
+}
+
+.item {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  &.selected {
+    background-color: darkgray;
+  }
+}
+
+.buttons {
+  text-align: center;
+
+  & button {
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+}

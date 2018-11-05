@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  margin: 10px;
+}
+.field {
+  margin-bottom: 10px;
+  & input, select {
+    width: 100%
+  }
+}

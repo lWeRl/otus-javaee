@@ -10,7 +10,20 @@
   border: 1px solid black;
   padding: 5px;
   margin-bottom: 5px;
+  cursor: pointer;
   &.selected {
-    border-color: red;
+    background-color: darkgray;
   }
+}
+
+.buttons {
+  text-align: center;
+
+  & button {
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
 }

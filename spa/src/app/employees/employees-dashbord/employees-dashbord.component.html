@@ -5,9 +5,9 @@
     [class.selected]="employee.id == selected?.id"
     (click)="selected = employee"
   >
-    {{employee.login}}
+    {{employee.id + ': ' + employee.login}}
   </div>
-  <div>
+  <div class="buttons">
     <button type="button" (click)="selected = {}">
       Новый
     </button>
@@ -16,12 +16,15 @@
 <div>
   <app-employee
     *ngIf="selected"
-    [model]="selected"
+    [employee]="selected"
     [departments]="departments$ | async"
     [salaries]="salaries$ | async"
   >
-    <button *ngIf="!selected.id" type="button" (click)="save(selected)">Сохранить</button>
-    <button *ngIf="selected.id" type="button" (click)="update(selected)">Обновить</button>
-    <button type="button" (click)="delete(selected)">Удалить</button>
+    <div class="buttons">
+      <button *ngIf="!selected.id" type="button" (click)="save(selected)">Сохранить</button>
+      <button *ngIf="selected.id" type="button" (click)="update(selected)">Обновить</button>
+      <button type="button" (click)="delete(selected)">Удалить</button>
+      <button type="button" (click)="selected = null">Отменить</button>
+    </div>
   </app-employee>
 </div>

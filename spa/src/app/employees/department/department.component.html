@@ -2,11 +2,12 @@
   <form #form="ngForm">
     <label>
       Город
-      <input type="text" required [(ngModel)]="model.city"/>
+      <input type="text" class="field" name="city" required [(ngModel)]="model.city"/>
     </label>
     <label>
       Название
-      <input type="text" required [(ngModel)]="model.name"/>
+      <input type="text" class="field" name="name" required [(ngModel)]="model.name"/>
     </label>
+    <ng-content></ng-content>
   </form>
 </div>

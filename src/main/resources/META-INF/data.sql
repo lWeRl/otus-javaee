@@ -2,15 +2,15 @@
 INSERT INTO "department" (name, city) VALUES ('Big Central', 'Moscow');
 INSERT INTO "department" (name, city) VALUES ('On River', 'St. Peterburg');
 INSERT INTO "department" (name, city) VALUES ('Small Town', 'Vologda');
-SELECT setval('department_id_seq', 3);
 -- Positions
 INSERT INTO "position" (name, salary) VALUES ('Big boss', 1000);
 INSERT INTO "position" (name, salary) VALUES ('Infernal manager', 666);
 INSERT INTO "position" (name, salary) VALUES ('Janitor', 10.12);
 INSERT INTO "position" (name, salary) VALUES ('Manager', 250);
 INSERT INTO "position" (name, salary) VALUES ('Fat Manager', 300);
-SELECT setval('position_id_seq', 5);
 -- Employers
+INSERT INTO "employee" (lastname, firstname, middlename, login, password, department_id, position_id)
+VALUES ('admin', 'admin', 'admin', 'admin', 'admin', 1, 1);
 INSERT INTO "employee" (lastname, firstname, middlename, login, password, department_id, position_id)
 VALUES ('lastname1', 'firstname1', 'middlename1', 'login1', 'password1', 1, 1);
 INSERT INTO "employee" (lastname, firstname, middlename, login, password, department_id, position_id)
@@ -35,4 +35,3 @@ INSERT INTO "employee" (lastname, firstname, middlename, login, password, depart
 VALUES ('lastname11', 'firstname11', 'middlename11', 'login11', 'password11', 2, 5);
 INSERT INTO "employee" (lastname, firstname, middlename, login, password, department_id, position_id)
 VALUES ('lastname12', 'firstname12', 'middlename12 ', 'login12', 'password12', 3, 5);
-SELECT setval('employee_id_seq', 15);
