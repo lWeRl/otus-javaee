@@ -17,11 +17,12 @@
   <app-position
     *ngIf="selected"
     [position]="selected"
+    #postion
   >
     <div class="buttons">
-      <button *ngIf="!selected.id" type="button" (click)="save(selected)">Сохранить</button>
-      <button *ngIf="selected.id" type="button" (click)="update(selected)">Обновить</button>
-      <button type="button" (click)="delete(selected)">Удалить</button>
+      <button *ngIf="!selected.id" type="button" (click)="save(postion.model)">Сохранить</button>
+      <button *ngIf="selected.id" type="button" (click)="update(postion.model)">Обновить</button>
+      <button type="button" (click)="delete(postion.model)">Удалить</button>
       <button type="button" (click)="selected = null">Отменить</button>
     </div>
   </app-position>

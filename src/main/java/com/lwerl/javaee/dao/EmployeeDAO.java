@@ -1,7 +1,6 @@
 package com.lwerl.javaee.dao;
 
 import com.lwerl.javaee.model.Employee;
-import org.hibernate.Session;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -33,33 +32,29 @@ public class EmployeeDAO implements DAO<Employee, Long> {
 
     @Override
     public Long save(Employee model) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(model);
-        entityManager.getTransaction().commit();
+        DAO.withTransaction(entityManager, model, entityManager::persist);
         return model.getId();
     }
 
     @Override
     public void update(Employee model) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(model);
-        entityManager.getTransaction().commit();
+        DAO.withTransaction(entityManager, model, entityManager::merge);
     }
 
     @Override
     public void delete(Employee model) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(get(model.getId()));
-        entityManager.getTransaction().commit();
+        DAO.withTransaction(entityManager, get(model.getId()), entityManager::remove);
     }
 
     public String getMaxSalaryName() {
         return (String) entityManager.createStoredProcedureQuery("getMaxSalaryName").getSingleResult();
     }
 
-    public Employee getByLogin(String login) {
-        return entityManager.createQuery("from Employee where login=:login", Employee.class)
+    @SuppressWarnings({"squid:S2068"})
+    public Employee getByCredentials(String login, String password) {
+        return entityManager.createQuery("from Employee where login=:login and password=:password", Employee.class)
                 .setParameter("login", login)
+                .setParameter("password", password)
                 .getSingleResult();
     }
 }

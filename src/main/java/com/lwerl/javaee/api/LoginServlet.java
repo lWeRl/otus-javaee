@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.lwerl.javaee.dao.EmployeeDAO;
 import com.lwerl.javaee.model.Employee;
 import lombok.Data;
-import sun.rmi.runtime.Log;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -27,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 
         Employee user = null;
         if (loginInfo != null) {
-            user = employeeDAO.getByLogin(loginInfo.getLogin());
+            user = employeeDAO.getByCredentials(loginInfo.getLogin(), loginInfo.getPassword());
         }
         if (user != null && user.getPassword().equals(loginInfo.getPassword())) {
             HttpSession session = request.getSession(true);

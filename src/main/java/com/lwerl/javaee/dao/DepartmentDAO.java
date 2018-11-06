@@ -34,23 +34,17 @@ public class DepartmentDAO implements DAO<Department, Long> {
 
     @Override
     public Long save(Department model) {
-        entityManager.getTransaction().begin();
-        Long id = (Long) entityManager.unwrap(Session.class).save(model);
-        entityManager.getTransaction().commit();
-        return id;
+        DAO.withTransaction(entityManager, model, entityManager::persist);
+        return model.getId();
     }
 
     @Override
     public void update(Department model) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(model);
-        entityManager.getTransaction().commit();
+        DAO.withTransaction(entityManager, model, entityManager::merge);
     }
 
     @Override
     public void delete(Department model) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(model);
-        entityManager.getTransaction().commit();
+        DAO.withTransaction(entityManager, get(model.getId()), entityManager::remove);
     }
 }

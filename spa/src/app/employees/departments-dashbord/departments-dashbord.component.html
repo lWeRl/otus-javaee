@@ -17,11 +17,12 @@
   <app-department
     *ngIf="selected"
     [model]="selected"
+    #department
   >
     <div class="buttons">
-      <button *ngIf="!selected.id" type="button" (click)="save(selected)">Сохранить</button>
-      <button *ngIf="selected.id" type="button" (click)="update(selected)">Обновить</button>
-      <button type="button" (click)="delete(selected)">Удалить</button>
+      <button *ngIf="!selected.id" type="button" (click)="save(department.model)">Сохранить</button>
+      <button *ngIf="selected.id" type="button" (click)="update(department.model)">Обновить</button>
+      <button type="button" (click)="delete(department.model)">Удалить</button>
       <button type="button" (click)="selected = null">Отменить</button>
     </div>
   </app-department>
