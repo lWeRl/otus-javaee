@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.lwerl.javaee</groupId>
-    <artifactId>homework3</artifactId>
+    <groupId>com.lwerl</groupId>
+    <artifactId>javaee</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>homework3</name>
+    <name>JavaEE</name>
     <properties>
         <servlet.version>4.0.1</servlet.version>
         <web-api.version>7.0</web-api.version>
@@ -18,18 +18,20 @@
         <webapp-dir>${project.build.directory}/${project.build.finalName}</webapp-dir>
         <gson.version>2.8.2</gson.version>
         <lombok.version>1.18.4</lombok.version>
+        <tomcat.version>9.0.12</tomcat.version>
+        <moxy.version>2.7.3</moxy.version>
     </properties>
 
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt</artifactId>
-                <version>${gwt.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
+        <!--<dependencies>-->
+            <!--<dependency>-->
+                <!--<groupId>com.google.gwt</groupId>-->
+                <!--<artifactId>gwt</artifactId>-->
+                <!--<version>${gwt.version}</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
+        <!--</dependencies>-->
     </dependencyManagement>
 
     <dependencies>
@@ -66,30 +68,6 @@
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
         </dependency>
-        <!--region GWT-->
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-codeserver</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!--endregion-->
         <!--HIBERNATE-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -118,6 +96,27 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--MOXy-->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.moxy</artifactId>
+            <version>${moxy.version}</version>
+        </dependency>
+
+
+        <!--Tomcat(provided)-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
+            <version>${tomcat.version}</version>
             <scope>provided</scope>
         </dependency>
 
