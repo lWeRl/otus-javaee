@@ -22,18 +22,23 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         LoginDTO loginInfo = new Gson().fromJson(request.getReader(), LoginDTO.class);
 
-        Employee user = null;
+
         if (loginInfo != null) {
-            user = employeeDAO.getByCredentials(loginInfo.getLogin(), loginInfo.getPassword());
+            Employee user = employeeDAO.getByCredentials(loginInfo.getLogin(), loginInfo.getPassword());
+
+            if (user != null) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
+
+                return;
+            }
         }
-        if (user != null && user.getPassword().equals(loginInfo.getPassword())) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);
-        } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
+
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
     }
 
     @Override

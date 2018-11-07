@@ -3,11 +3,11 @@ package com.lwerl.javaee.servlet.filters;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * Created by lWeRl on 08.02.2018.
  */
 @WebFilter(filterName = "AgentFilter", urlPatterns = "/*")
-public class AgentFilter implements Filter {
+public class AgentFilter extends HttpFilter {
 
     private final int IE_MIN_VERSION = 10;
     private final int CHROME_MIN_VERSION = 50;
@@ -23,16 +23,13 @@ public class AgentFilter implements Filter {
     private final int OPERA_MIN_VERSION = 38;
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        if (req instanceof HttpServletRequest) {
-            HttpServletRequest httpRequest = (HttpServletRequest) req;
-            if (!hasCookie(httpRequest) && !isResource(httpRequest) && !isActualBrowser(httpRequest)) {
-                httpRequest.getRequestDispatcher("/pages/outofdate.jsp").forward(req, resp);
-            } else {
-                chain.doFilter(req, resp);
-                HttpServletResponse httpResponse = (HttpServletResponse) resp;
-                httpResponse.addCookie(new Cookie("browser", "actual"));
-            }
+    public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, IOException {
+
+        if (!hasCookie(req) && !isResource(req) && !isActualBrowser(req)) {
+            req.getRequestDispatcher("/pages/outofdate.jsp").forward(req, resp);
+        } else {
+            chain.doFilter(req, resp);
+            resp.addCookie(new Cookie("browser", "actual"));
         }
     }
 
@@ -75,7 +72,7 @@ public class AgentFilter implements Filter {
                 }
             }
 
-            if(!result) {
+            if (!result) {
                 req.setAttribute("BrowserName", browser);
                 req.setAttribute("BrowserVersion", Integer.parseInt(version));
             }
@@ -91,11 +88,11 @@ public class AgentFilter implements Filter {
 
 
     @Override
-    public void destroy () {
+    public void destroy() {
     }
 
     @Override
-    public void init (FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
-    }
+}
