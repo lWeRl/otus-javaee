@@ -38,7 +38,9 @@ public class CurrencyRatesHolder {
     }
 
     public void updateRates() {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new URL(SERVICE_URL).openStream()))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new URL(SERVICE_URL).openStream(), "windows-1251"))
+        ) {
             write.lock();
             raw = br.lines().collect(Collectors.joining("\n"));
             updatedDate = new Date();
@@ -51,7 +53,7 @@ public class CurrencyRatesHolder {
 
     public String getHtmlView() {
         StringWriter result = new StringWriter();
-        try(StringReader rawXmlReader = new StringReader(raw)) {
+        try (StringReader rawXmlReader = new StringReader(raw)) {
             read.lock();
             StreamSource xslSource = new StreamSource(getClass().getClassLoader().getResourceAsStream("/xslt/currency.xsl"));
             StreamSource source = new StreamSource(rawXmlReader);

@@ -2,12 +2,16 @@ package com.lwerl.javaee.servlet.listeners;
 
 import com.lwerl.javaee.cache.CurrencyRatesHolder;
 import com.lwerl.javaee.cache.NewsHolder;
+import com.lwerl.javaee.dao.DAO;
 import com.lwerl.javaee.dao.DepartmentDAO;
 import com.lwerl.javaee.dao.EmployeeDAO;
 import com.lwerl.javaee.dao.PositionDAO;
+import com.lwerl.javaee.model.IdEntity;
+import com.lwerl.javaee.model.SeqEntity;
 import com.lwerl.javaee.xml.PersistenceData;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -18,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -46,6 +51,8 @@ public class OnStartServletContextListener implements ServletContextListener {
     private PositionDAO positionDAO;
     @Inject
     private DepartmentDAO departmentDAO;
+    @Inject
+    private EntityManager entityManager;
 
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
@@ -121,13 +128,21 @@ public class OnStartServletContextListener implements ServletContextListener {
     }
 
     private void populatePersistenceData(PersistenceData data) {
-        data.getDepartments().forEach(departmentDAO::save);
-        data.getPositions().forEach(positionDAO::save);
-        data.getEmployees().forEach(employeeDAO::save);
+
+        persist(data.getDepartments());
+        persist(data.getPositions());
+        persist(data.getEmployees());
     }
 
 
     private String getXmlFilePath() {
         return System.getProperty("user.home") + System.getProperty("file.separator") + System.getProperty("xml.restore.file.name");
+    }
+
+    private <T extends IdEntity & SeqEntity> void persist(List<T> list) {
+        if (list != null) {
+
+            list.forEach(entity -> DAO.withTransaction(entityManager, entity, entityManager::merge));
+        }
     }
 }

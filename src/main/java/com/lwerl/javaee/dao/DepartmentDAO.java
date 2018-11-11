@@ -1,8 +1,6 @@
 package com.lwerl.javaee.dao;
 
 import com.lwerl.javaee.model.Department;
-import com.lwerl.javaee.model.Position;
-import org.hibernate.Session;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

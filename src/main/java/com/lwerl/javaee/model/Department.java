@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "department")
 @Entity
-public class Department {
+public class Department implements IdEntity, SeqEntity {
 
     @XmlAttribute
     @Id
@@ -68,5 +68,10 @@ public class Department {
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getSequencyName() {
+        return "department_id_seq";
     }
 }

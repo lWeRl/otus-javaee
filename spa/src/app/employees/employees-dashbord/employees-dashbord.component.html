@@ -1,4 +1,10 @@
 <div>
+  <div class="search">
+    <label>
+      <input type="text" #search>
+    </label>
+    <button (click)="getList(search.value)">Поиск</button>
+  </div>
   <div
     *ngFor="let employee of employees$ | async as employees"
     class="item"

@@ -30,6 +30,26 @@ public class EmployeeDAO implements DAO<Employee, Long> {
         return entityManager.createQuery("from Employee", Employee.class).getResultList();
     }
 
+    public List<Employee> getAll(String search) {
+        if (search == null || search.isEmpty()) {
+            return getAll();
+        } else {
+            return entityManager.createQuery(
+                    "select e from Employee e join e.department d join e.position p "
+                            + "where LOWER( e.login) like :search "
+                            + "or LOWER(e.firstName) like :search "
+                            + "or LOWER(e.middleName) like :search "
+                            + "or LOWER(e.lastName) like :search "
+                            + "or LOWER(d.city) like :search "
+                            + "or LOWER(d.name) like :search "
+                            + "or LOWER(p.name) like :search "
+                    , Employee.class)
+                    .setParameter("search","%" + search.toLowerCase() + "%")
+                    .getResultList();
+        }
+
+    }
+
     @Override
     public Long save(Employee model) {
         DAO.withTransaction(entityManager, model, entityManager::persist);

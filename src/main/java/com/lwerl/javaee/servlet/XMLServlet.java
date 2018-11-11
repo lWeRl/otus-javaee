@@ -48,6 +48,7 @@ public class XMLServlet extends HttpServlet {
         try(OutputStream outputStream = Files.newOutputStream(Paths.get(XML_FILE_PATH))) {
             JAXBContext context = JAXBContext.newInstance(JAXBListWrapper.class, Employee.class);
             List<Employee> employees = employeeDAO.getAll();
+            employees.forEach(employee -> employee.setPassword(null));
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(new JAXBListWrapper<>(employees).toElement(JAXBRegistry.EMPLOYEES), outputStream);

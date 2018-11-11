@@ -31,6 +31,47 @@
         <url-pattern>*.jsp</url-pattern>
         <url-pattern>*.jspx</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JSP main</servlet-name>
+        <jsp-file>/WEB-INF/jsp/main.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP main</servlet-name>
+        <url-pattern>/jsp/main</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JSP login</servlet-name>
+        <jsp-file>/WEB-INF/jsp/login.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP login</servlet-name>
+        <url-pattern>/jsp/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JSP news</servlet-name>
+        <jsp-file>/WEB-INF/jsp/news.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP news</servlet-name>
+        <url-pattern>/jsp/news</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JSP other</servlet-name>
+        <jsp-file>/WEB-INF/jsp/other.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP other</servlet-name>
+        <url-pattern>/jsp/other</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JSP script</servlet-name>
+        <jsp-file>/WEB-INF/jsp/script.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP script</servlet-name>
+        <url-pattern>/jsp/script</url-pattern>
+    </servlet-mapping>
     
     <listener>
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
@@ -47,7 +88,7 @@
         <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
         <init-param>
             <param-name>cors.allowed.origins</param-name>
-            <param-value>http://localhost:4200</param-value>
+            <param-value>http://localhost:4200, http://localhost:8080</param-value>
         </init-param>
         <init-param>
             <param-name>cors.allowed.methods</param-name>

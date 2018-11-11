@@ -29,8 +29,12 @@ export class EmployeesDashbordComponent implements OnInit {
     this.salaries$ = this.http.get<Salary[]>('http://localhost:8080/api/positions', {withCredentials: true});
   }
 
-  getList = () => {
-    this.employees$ = this.http.get<Employee[]>('http://localhost:8080/api/employees', {withCredentials: true});
+  getList = (search?) => {
+    const params = {};
+    if (search) {
+      params['search'] = search;
+    }
+    this.employees$ = this.http.get<Employee[]>('http://localhost:8080/api/employees', {params: params, withCredentials: true});
     this.selected = null;
   };
 

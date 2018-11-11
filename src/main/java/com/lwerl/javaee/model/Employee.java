@@ -1,7 +1,10 @@
 package com.lwerl.javaee.model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by lWeRl on 21.01.2018.
@@ -16,7 +19,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "employee")
 @Entity
-public class Employee {
+public class Employee implements IdEntity, SeqEntity{
 
     @XmlAttribute
     @Id
@@ -35,7 +38,7 @@ public class Employee {
     private Position position;
 
     private String login;
-    @XmlTransient
+
     private String password;
 
     public Long getId() {
@@ -129,5 +132,10 @@ public class Employee {
                 ", position=" + position +
                 ", login='" + login + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getSequencyName() {
+        return "employee_id_seq";
     }
 }

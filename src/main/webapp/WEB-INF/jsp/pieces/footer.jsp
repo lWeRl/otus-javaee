@@ -1,0 +1,1 @@
+<footer class="footer"><span>I'm footer</span></footer>
