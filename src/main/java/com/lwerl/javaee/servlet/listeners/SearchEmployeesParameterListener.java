@@ -7,6 +7,7 @@ import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -34,7 +35,7 @@ public class SearchEmployeesParameterListener implements ServletRequestAttribute
 
             if (srae.getName().equals(EMPLOYEE_LIST_ATTRIBUTE_NAME)) {
                 cache.putIfAbsent(
-                        request.getQueryString() == null ? "" : request.getQueryString(),
+                        Objects.toString(request.getQueryString(), ""),
                         (List<Employee>) srae.getValue()
                 );
             }
@@ -47,7 +48,7 @@ public class SearchEmployeesParameterListener implements ServletRequestAttribute
         return
                 srae.getServletRequest() instanceof HttpServletRequest
                         && ((HttpServletRequest) srae.getServletRequest()).getRequestURI().startsWith("/api/employees")
-                        && ((HttpServletRequest) srae.getServletRequest()).getMethod().toUpperCase().equals("GET");
+                        && ((HttpServletRequest) srae.getServletRequest()).getMethod().equalsIgnoreCase("GET");
 
     }
 }

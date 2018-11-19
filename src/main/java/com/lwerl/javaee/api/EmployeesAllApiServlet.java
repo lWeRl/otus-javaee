@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 @WebServlet(urlPatterns = "/api/employees")
@@ -29,7 +30,7 @@ public class EmployeesAllApiServlet extends HttpServlet {
 
         request.setAttribute(
                 EMPLOYEE_QUERY_ATTRIBUTE_NAME,
-                request.getQueryString() == null ? "" : request.getQueryString()
+                Objects.toString(request.getQueryString(), "")
         );
         List<Employee> all = (List<Employee>) request.getAttribute(EMPLOYEE_LIST_ATTRIBUTE_NAME);
         if (all == null) {

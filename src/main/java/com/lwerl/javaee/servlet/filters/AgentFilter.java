@@ -1,6 +1,8 @@
 package com.lwerl.javaee.servlet.filters;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpFilter;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,9 +46,7 @@ public class AgentFilter extends HttpFilter {
 
     private boolean isActualBrowser(HttpServletRequest req) {
         boolean result = true;
-        String agent = req.getHeader("User-Agent") == null
-                ? ""
-                : req.getHeader("User-Agent");
+        String agent = Objects.toString(req.getHeader("User-Agent"), "");
         Pattern regexp = Pattern.compile("(msie|chrome|firefox|opera)(\\s|/|\\\\)(\\d*)\\.\\d", Pattern.CASE_INSENSITIVE);
         Matcher matcher = regexp.matcher(agent);
         if (matcher.find()) {

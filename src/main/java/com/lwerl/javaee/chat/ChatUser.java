@@ -1,5 +1,6 @@
 package com.lwerl.javaee.chat;
 
+import com.lwerl.javaee.cdi.CDIEndpointConfigurator;
 import lombok.AccessLevel;
 import lombok.Getter;
 

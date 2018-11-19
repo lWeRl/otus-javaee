@@ -1,4 +1,4 @@
-package com.lwerl.javaee.chat;
+package com.lwerl.javaee.cdi;
 
 import javax.enterprise.inject.spi.CDI;
 import javax.websocket.server.ServerEndpointConfig;
