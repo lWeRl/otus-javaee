@@ -1,0 +1,9 @@
+<div *ngIf="socket$; else connectTemplte">
+  <app-chat-message-box [messages]="messages"></app-chat-message-box>
+  <app-chat-input (send)="send($event)"></app-chat-input>
+</div>
+<ng-template #connectTemplte>
+  <input type="text" #nameInput/>
+  <button (click)="connect(nameInput.value)" [disabled]="!nameInput">Connect</button>
+</ng-template>
+

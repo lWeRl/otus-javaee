@@ -20,19 +20,8 @@
         <lombok.version>1.18.4</lombok.version>
         <tomcat.version>9.0.12</tomcat.version>
         <moxy.version>2.7.3</moxy.version>
+        <javax.websocket-api.version>1.1</javax.websocket-api.version>
     </properties>
-
-    <dependencyManagement>
-        <!--<dependencies>-->
-            <!--<dependency>-->
-                <!--<groupId>com.google.gwt</groupId>-->
-                <!--<artifactId>gwt</artifactId>-->
-                <!--<version>${gwt.version}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-        <!--</dependencies>-->
-    </dependencyManagement>
 
     <dependencies>
         <!--SERVLET API-->
@@ -103,6 +92,22 @@
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.moxy</artifactId>
             <version>${moxy.version}</version>
+        </dependency>
+
+        <!--WebSocket JSR-356-->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>${javax.websocket-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--JavaX Annotation  JSR-305-->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
 
 
