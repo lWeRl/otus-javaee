@@ -8,7 +8,7 @@ import {WebSocketSubject} from 'rxjs/webSocket';
 })
 export class ChatComponent implements OnInit {
 
-  private socket$: WebSocketSubject<Message>;
+  private socket$: WebSocketSubject<Message|string>;
   messages: string[] = [];
 
   send;
@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   connect(name: string) {
     if (name) {
       this.socket$ = new WebSocketSubject(`ws://localhost:8080/chat/connect/${name}`);
-      this.socket$.subscribe(message => {
+      this.socket$.subscribe((message: Message) => {
         this.messages = [
           ...this.messages,
           message.message
